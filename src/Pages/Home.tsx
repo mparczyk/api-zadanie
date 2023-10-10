@@ -1,33 +1,29 @@
-import { useState, useEffect } from 'react'
-import '../App.css'
-
-interface FetchDataResponse {
-    homeData: string;
-}
-
-const useFetchData = (): FetchDataResponse => {
-    const [homeData, setHomeData] = useState<string>("");
-
-    useEffect(() => {
-        const fetchHomeSite = async () => {
-            const response = await fetch("http://localhost:3001/");
-            if (response.ok) {
-                const data = await response.text();
-                setHomeData(data)
-            }
-        }
-        fetchHomeSite();
-    }, []);
-    
-    return {homeData};
-}
+import './Home.css'
+import { Outlet } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
-    const {homeData} = useFetchData();
     return (
-        <header> 
-          <p>{homeData}</p>
-        </header>
+        <div className="wrapper">
+        <header className="header">Super Article Page</header>
+        <main className="main">
+          <Outlet />
+        </main>
+        <nav className="aside aside-1">
+            <p>Navigation</p>
+            <ul className="list">
+            <li>
+              <Link className="link" to={`/`}>Start</Link>
+            </li>
+            <li>
+              <Link className="link" to={`/articles`}>Arcitles</Link>
+            </li>
+            <li>
+              <Link className="link" to={`/newarticle`}>New Article</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     );
   }
   
