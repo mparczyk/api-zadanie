@@ -2,13 +2,9 @@ import { Form, Button, Input, Space } from 'antd';
 import { useLoaderData } from 'react-router';
 import type { LoaderFunctionArgs } from 'react-router-dom';
 
-const { TextArea } = Input;
+import { IArticle } from '../utils/types';
 
-interface ArticleProps {
-  id: number;
-  article: string;
-  description: string;
-}
+const { TextArea } = Input;
 
 export const articleIdLoader = async ({ params }: LoaderFunctionArgs) => {
   const response = await fetch(`http://localhost:3001/articles/${params.id}`);
@@ -28,7 +24,7 @@ const editArticle = async (data: object) => {
     body: JSON.stringify(data)
   };
   const response = await fetch(`http://localhost:3001/articles/1`, requestOptions);
-  const result: ArticleProps = await response.json();
+  const result: IArticle = await response.json();
   console.log(result);
 };
 

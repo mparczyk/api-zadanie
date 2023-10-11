@@ -1,15 +1,10 @@
 import { useState, useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
 import { List, Card } from 'antd';
 
-import { ReactComponent as Edit } from '../Pages/edit-button.svg';
+import { IArticle } from '../utils/types';
 
-interface IArticle {
-    id: number;
-    article: string;
-    description: string;
-  }
+import { ReactComponent as Edit } from '../Pages/edit-button.svg';
 
 interface SuccessResponse<T> {
     data: T[];

@@ -1,11 +1,8 @@
 import { Button, Form, Input, Space } from 'antd';
 
-const { TextArea } = Input;
+import { IArticle } from '../utils/types';
 
-interface ArticleProps {
-  article: string;
-  description: string;
-};
+const { TextArea } = Input;
 
 const onArticleSubmit = async (data: object) => {
     const response = await fetch('http://localhost:3001/articles', {
@@ -35,7 +32,7 @@ export const ArcitlesForm = (): JSX.Element => {
       onFinish={onArticleSubmit}
       autoComplete="off"
     >
-      <Form.Item<ArticleProps>
+      <Form.Item<IArticle>
         label="Article Name"
         name="article"
         rules={[{ required: true, message: 'Please input Article Name!' }]}
@@ -43,7 +40,7 @@ export const ArcitlesForm = (): JSX.Element => {
         <Input />
       </Form.Item>
 
-      <Form.Item<ArticleProps>
+      <Form.Item<IArticle>
         label="Description"
         name="description"
         rules={[{ required: true, message: 'Please input Article Description!' }]}
