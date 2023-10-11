@@ -1,5 +1,5 @@
 import { Form, Button, Input, Space } from 'antd';
-import { useParams, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import type { LoaderFunctionArgs } from 'react-router-dom';
 
 const { TextArea } = Input;

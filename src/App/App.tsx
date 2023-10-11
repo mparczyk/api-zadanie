@@ -1,8 +1,6 @@
-import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { paths } from './routes';
-
 
 const browserRouter = createBrowserRouter(paths);
 

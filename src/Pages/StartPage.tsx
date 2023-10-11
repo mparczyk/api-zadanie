@@ -1,8 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 interface FetchDataResponse {
     homeData: string;
 }
+
+const Text = styled.p`
+    font-size: 4rem;
+    font-weight: 400;
+    color: #001529;
+`;
 
 const useFetchHomeData = (): FetchDataResponse => {
     const [homeData, setHomeData] = useState<string>("");
@@ -23,6 +30,6 @@ const useFetchHomeData = (): FetchDataResponse => {
 
 export const StartPage = (): JSX.Element => {
     const {homeData} = useFetchHomeData();
-    return <p>{homeData}</p>
+    return <Text>{homeData}</Text>
   };
   

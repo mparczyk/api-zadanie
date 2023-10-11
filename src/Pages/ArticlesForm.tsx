@@ -48,7 +48,7 @@ export const ArcitlesForm = (): JSX.Element => {
         name="description"
         rules={[{ required: true, message: 'Please input Article Description!' }]}
       >
-        <TextArea  rows={4} />
+        <TextArea rows={4} />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -58,7 +58,7 @@ export const ArcitlesForm = (): JSX.Element => {
               Submit
             </Button>
             <Button danger htmlType="button" onClick={onReset}>
-              Reset
+              Clear
             </Button>
           </Space>
         </Space>
