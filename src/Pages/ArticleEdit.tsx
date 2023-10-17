@@ -1,80 +1,55 @@
-import { Form, Button, Input, Space } from 'antd';
 import { useLoaderData } from 'react-router';
 import type { LoaderFunctionArgs } from 'react-router-dom';
+import { Form, Button, Space } from 'antd';
 
-import { IArticle } from '../utils/types';
-
-const { TextArea } = Input;
+import type { IArticle } from './Types/types';
+import { FormItem } from '../UI/FormItem';
+import { request } from '../utils/http';
 
 export const articleIdLoader = async ({ params }: LoaderFunctionArgs) => {
-  const response = await fetch(`http://localhost:3001/articles/${params.id}`);
-
-  if (!response.ok) {
-      throw new Response("Some Error", {status: response.status})
-  }
-  return response.json();
+  const response = await request<IArticle>('get', `http://localhost:3001/articles/${params.id}`);
+  return response;
 };
 
 type ArticleLoaderType = Awaited<ReturnType<typeof articleIdLoader>>;
 
 const editArticle = async (data: object) => {
-  const requestOptions = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  };
-  const response = await fetch(`http://localhost:3001/articles/1`, requestOptions);
-  const result: IArticle = await response.json();
-  console.log(result);
+  const response = await request<IArticle>('put', `http://localhost:3001/articles/1`, data);
 };
 
 const deleteArticleById = async () => {
-  const response = await fetch(`http://localhost:3001/articles/1`, { method: 'DELETE' });
-  const result = await response.json();
-  console.log(result);
-}
+  const response = await request('delete', `http://localhost:3001/articles/1`);
+  console.log('success', response);
+};
 
 export const ArticleEditPage = (): JSX.Element => {
   const article = useLoaderData() as ArticleLoaderType;
+  const [form] = Form.useForm();
+  console.log(article);
   return (
-    <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
-      onFinish={editArticle}
-      autoComplete="off"
-    >
-      <Form.Item
-        label="Change Article Name"
-        name="article"
-        initialValue={article.data.article}
-        rules={[{ required: true, message: 'Please input Article Name!' }]}
+    <>
+      <h2>Edit Article</h2>
+      <Form
+        form={form}
+        name='basic'
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        onFinish={editArticle}
+        initialValues={article}
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Change Description"
-        name="description"
-        initialValue={article.data.description}
-        rules={[{ required: true, message: 'Please input Article Description!' }]}
-      >
-        <TextArea rows={4} />
-      </Form.Item>
-
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Space direction="vertical">
+        <FormItem />
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Space>
-            <Button type="primary" htmlType="submit">
+            <Button type='primary' htmlType='submit'>
               Save
             </Button>
-            <Button type="primary" danger onClick={deleteArticleById}>
-                Delete
+            <Button type='primary' danger onClick={deleteArticleById}>
+              Delete
             </Button>
           </Space>
-        </Space>
-      </Form.Item>
-    </Form>
-  )
-}
+        </Form.Item>
+      </Form>
+    </>
+  );
+};

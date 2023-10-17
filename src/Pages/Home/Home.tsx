@@ -1,56 +1,50 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router';
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  EditOutlined,
-  HomeOutlined,
-  FileTextOutlined,
-} from '@ant-design/icons';
+import { useMatches } from 'react-router-dom';
+import { MenuFoldOutlined, MenuUnfoldOutlined, EditOutlined, HomeOutlined, FileTextOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 
-import { CustomButton, CustomContent, CustomHeader, NavigationLink, Title } from './styles';
+import { CustomButton, CustomContent, CustomHeader, StyledLink, Title, TitleWrapper } from './styles';
 
 const { Sider } = Layout;
 
+const menu = [
+  {
+    key: 'start',
+    icon: <HomeOutlined />,
+    label: <StyledLink to={`/`}>Start</StyledLink>,
+  },
+  {
+    key: 'articles',
+    icon: <FileTextOutlined />,
+    label: <StyledLink to={`/articles`}>Arcitles</StyledLink>,
+  },
+  {
+    key: 'newarticle',
+    icon: <EditOutlined />,
+    label: <StyledLink to={`/newarticle`}>New Article</StyledLink>,
+  },
+];
+
 export const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
-  
+  const matches = useMatches();
+
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <HomeOutlined />,
-              label: <NavigationLink className="link" to={`/`}>Start</NavigationLink>,
-            },
-            {
-              key: '2',
-              icon: <FileTextOutlined />,
-              label: <NavigationLink className="link" to={`/articles`}>Arcitles</NavigationLink>,
-            },
-            {
-              key: '3',
-              icon: <EditOutlined />,
-              label: <NavigationLink className="link" to={`/newarticle`}>New Article</NavigationLink>,
-            },
-          ]}
-        />
+        <Menu theme='dark' mode='inline' selectedKeys={[matches.at(-1)?.id ?? '']} items={menu} />
       </Sider>
       <Layout>
         <CustomHeader>
           <CustomButton
-            type="text"
+            type='text'
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={() => setCollapsed(prevState => !prevState)}
           />
-          <Title>Super Article Page</Title>
+          <TitleWrapper>
+            <Title>Super Article Page</Title>
+          </TitleWrapper>
         </CustomHeader>
         <CustomContent>
           <Outlet />
@@ -59,3 +53,5 @@ export const Home = () => {
     </Layout>
   );
 };
+
+// <Link to={routes.map()}>{t('menu.map')}</Link>

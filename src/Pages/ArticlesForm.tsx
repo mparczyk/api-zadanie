@@ -1,18 +1,13 @@
-import { Button, Form, Input, Space } from 'antd';
+import { Button, Form, Space } from 'antd';
 
-import { IArticle } from '../utils/types';
-
-const { TextArea } = Input;
+import type { IArticle } from './Types/types';
+import { FormItem } from '../UI/FormItem';
+import { request } from '../utils/http';
 
 const onArticleSubmit = async (data: object) => {
-    const response = await fetch('http://localhost:3001/articles', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
-    });
-    const result = await response.json();
-    console.log(result);
-}
+  const response = await request<IArticle>('post', 'http://localhost:3001/articles', data);
+  console.log(response);
+};
 
 export const ArcitlesForm = (): JSX.Element => {
   const [form] = Form.useForm();
@@ -22,44 +17,31 @@ export const ArcitlesForm = (): JSX.Element => {
   };
 
   return (
-    <Form
-      form={form}
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
-      initialValues={{ remember: true }}
-      onFinish={onArticleSubmit}
-      autoComplete="off"
-    >
-      <Form.Item<IArticle>
-        label="Article Name"
-        name="article"
-        rules={[{ required: true, message: 'Please input Article Name!' }]}
+    <>
+      <h2>Create New Article</h2>
+      <Form
+        form={form}
+        name='basic'
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        onFinish={onArticleSubmit}
       >
-        <Input />
-      </Form.Item>
+        <FormItem />
 
-      <Form.Item<IArticle>
-        label="Description"
-        name="description"
-        rules={[{ required: true, message: 'Please input Article Description!' }]}
-      >
-        <TextArea rows={4} />
-      </Form.Item>
-
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Space direction="vertical">
-          <Space>
-            <Button type="primary"  htmlType="submit">
-              Submit
-            </Button>
-            <Button danger htmlType="button" onClick={onReset}>
-              Clear
-            </Button>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Space direction='vertical'>
+            <Space>
+              <Button type='primary' htmlType='submit'>
+                Submit
+              </Button>
+              <Button danger htmlType='button' onClick={onReset}>
+                Clear
+              </Button>
+            </Space>
           </Space>
-        </Space>
-      </Form.Item>
-    </Form>
+        </Form.Item>
+      </Form>
+    </>
   );
-}
+};
