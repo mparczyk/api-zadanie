@@ -1,9 +1,9 @@
-import { ArticleEditPage } from '../../Pages/ArticleEdit';
-import { ArticlesSite } from '../../Pages/Articles';
-import { ArcitlesForm } from '../../Pages/ArticlesForm';
 import { Home } from '../../Pages/Home/Home';
-import { StartPage } from '../../Pages/StartPage';
-import { articleIdLoader } from '../../Pages/ArticleEdit';
+import { StartPage } from '../../Pages/StartPage/StartPage';
+import { ArticleEditPage } from '../../Pages/Articles/ArticleEdit';
+import { ArticlesSite } from '../../Pages/Articles/Articles';
+import { ArcitlesForm } from '../../Pages/Articles/ArticlesForm';
+import { articleIdLoader } from '../../Pages/Articles/ArticleEdit';
 
 export const routes = [
   {

@@ -1,8 +1,10 @@
 import { Button, Form, Space } from 'antd';
 
-import type { IArticle } from './Types/types';
-import { FormItem } from '../UI/FormItem';
-import { request } from '../utils/http';
+import type { IArticle } from '../Types/types';
+
+import { request } from '../../utils/http';
+
+import { FormItem } from '../../UI/FormItem';
 
 const onArticleSubmit = async (data: object) => {
   const response = await request<IArticle>('post', 'http://localhost:3001/articles', data);

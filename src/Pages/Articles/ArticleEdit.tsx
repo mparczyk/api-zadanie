@@ -2,9 +2,10 @@ import { useLoaderData } from 'react-router';
 import type { LoaderFunctionArgs } from 'react-router-dom';
 import { Form, Button, Space } from 'antd';
 
-import type { IArticle } from './Types/types';
-import { FormItem } from '../UI/FormItem';
-import { request } from '../utils/http';
+import type { IArticle } from '../Types/types';
+
+import { FormItem } from '../../UI/FormItem';
+import { request } from '../../utils/http';
 
 export const articleIdLoader = async ({ params }: LoaderFunctionArgs) => {
   const response = await request<IArticle>('get', `http://localhost:3001/articles/${params.id}`);
