@@ -15,6 +15,7 @@ type ArticleLoaderType = Awaited<ReturnType<typeof articleIdLoader>>;
 
 const editArticle = async (data: object) => {
   const response = await request<IArticle>('put', `http://localhost:3001/articles/1`, data);
+  return response;
 };
 
 const deleteArticleById = async () => {
