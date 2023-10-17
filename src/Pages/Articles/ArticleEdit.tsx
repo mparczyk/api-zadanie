@@ -19,7 +19,7 @@ const editArticle = async (data: object) => {
   return response;
 };
 
-const deleteArticleById = async () => {
+const deleteArticle = async () => {
   const response = await request('delete', `http://localhost:3001/articles/1`);
   console.log('success', response);
 };
@@ -46,7 +46,7 @@ export const ArticleEditPage = (): JSX.Element => {
             <Button type='primary' htmlType='submit'>
               Save
             </Button>
-            <Button type='primary' danger onClick={deleteArticleById}>
+            <Button type='primary' danger onClick={deleteArticle}>
               Delete
             </Button>
           </Space>

@@ -54,5 +54,3 @@ export const Home = () => {
     </Layout>
   );
 };
-
-// <Link to={routes.map()}>{t('menu.map')}</Link>
