@@ -2,7 +2,7 @@ import { Form, Input } from 'antd';
 
 const { TextArea } = Input;
 
-export const FormItem = (): JSX.Element => {
+export const CommonForm = (): JSX.Element => {
   return (
     <>
       <Form.Item label='Article Name' name='article' rules={[{ required: true, message: 'Please input Article Name!' }]}>

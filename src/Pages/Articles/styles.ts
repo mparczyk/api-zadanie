@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Form } from 'antd';
 
-import { ReactComponent as EditIcon } from '../assets/icons/edit-button.svg';
+import { ReactComponent as EditIcon } from '../../assets/icons/edit-button.svg';
 
 export const ContentWrapper = styled.div`
   display: flex;
@@ -8,6 +9,9 @@ export const ContentWrapper = styled.div`
   align-items: center;
 `;
 export const StyledEditIcon = styled(EditIcon)`
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
+`;
+export const StyledForm = styled(Form)`
+  max-width: 600px;
 `;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { List, Card } from 'antd';
 
-import type { IArticle } from '../Types/types';
+import type { IArticle } from './types';
 
 import { request } from '../../utils/http';
 

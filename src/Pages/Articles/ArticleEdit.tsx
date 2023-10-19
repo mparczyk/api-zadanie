@@ -2,10 +2,11 @@ import { useLoaderData } from 'react-router';
 import type { LoaderFunctionArgs } from 'react-router-dom';
 import { Form, Button, Space } from 'antd';
 
-import type { IArticle } from '../Types/types';
+import type { IArticle } from './types';
 
-import { FormItem } from '../../UI/FormItem';
+import { CommonForm } from './CommonForm';
 import { request } from '../../utils/http';
+import { StyledForm } from './styles';
 
 export const articleIdLoader = async ({ params }: LoaderFunctionArgs) => {
   const response = await request<IArticle>('get', `http://localhost:3001/articles/${params.id}`);
@@ -14,44 +15,48 @@ export const articleIdLoader = async ({ params }: LoaderFunctionArgs) => {
 
 type ArticleLoaderType = Awaited<ReturnType<typeof articleIdLoader>>;
 
-const editArticle = async (data: object) => {
-  const response = await request<IArticle>('put', `http://localhost:3001/articles/1`, data);
-  return response;
+const editArticle = async (article: IArticle, data: object) => {
+  await request<IArticle>('put', `http://localhost:3001/articles/${article.id}`, data);
 };
 
-const deleteArticle = async () => {
-  const response = await request('delete', `http://localhost:3001/articles/1`);
-  console.log('success', response);
+const deleteArticle = async (article: IArticle) => {
+  await request('delete', `http://localhost:3001/articles/${article.id}`);
 };
 
 export const ArticleEditPage = (): JSX.Element => {
   const article = useLoaderData() as ArticleLoaderType;
   const [form] = Form.useForm();
-  console.log(article);
+
+  const handleSubmit = (data: object) => {
+    editArticle(article, data);
+  };
+  const handleClick = () => {
+    deleteArticle(article);
+  };
+
   return (
     <>
       <h2>Edit Article</h2>
-      <Form
+      <StyledForm
         form={form}
-        name='basic'
+        name='edit-article'
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        onFinish={editArticle}
+        onFinish={handleSubmit}
         initialValues={article}
       >
-        <FormItem />
+        <CommonForm />
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Space>
             <Button type='primary' htmlType='submit'>
               Save
             </Button>
-            <Button type='primary' danger onClick={deleteArticle}>
+            <Button type='primary' danger onClick={handleClick}>
               Delete
             </Button>
           </Space>
         </Form.Item>
-      </Form>
+      </StyledForm>
     </>
   );
 };

@@ -2,32 +2,15 @@ import { useState } from 'react';
 import { Outlet } from 'react-router';
 import { useMatches } from 'react-router-dom';
 
-import { MenuFoldOutlined, MenuUnfoldOutlined, EditOutlined, HomeOutlined, FileTextOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 
-import { CustomButton, CustomContent, CustomHeader, StyledLink, Title, TitleWrapper } from './styles';
+import { CustomButton, CustomContent, CustomHeader, Title, TitleWrapper } from './styles';
+import { menu } from './menuItems';
 
 const { Sider } = Layout;
 
-const menu = [
-  {
-    key: 'start',
-    icon: <HomeOutlined />,
-    label: <StyledLink to={`/`}>Start</StyledLink>,
-  },
-  {
-    key: 'articles',
-    icon: <FileTextOutlined />,
-    label: <StyledLink to={`/articles`}>Arcitles</StyledLink>,
-  },
-  {
-    key: 'newarticle',
-    icon: <EditOutlined />,
-    label: <StyledLink to={`/newarticle`}>New Article</StyledLink>,
-  },
-];
-
-export const Home = () => {
+export const Home = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false);
   const matches = useMatches();
 
