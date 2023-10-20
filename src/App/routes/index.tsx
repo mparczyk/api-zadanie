@@ -1,10 +1,13 @@
+import { QueryClient } from '@tanstack/react-query';
+
 import { Home } from '../../Pages/Home/Home';
 import { StartPage } from '../../Pages/StartPage/StartPage';
 import { ArticleEditPage } from '../../Pages/Articles/ArticleEdit';
 import { ArticlesSite } from '../../Pages/Articles/Articles';
 import { ArcitlesForm } from '../../Pages/Articles/ArticlesForm';
-import { articleIdLoader } from '../../Pages/Articles/ArticleEdit';
+import { articleLoader } from '../../Pages/Articles/loaders';
 
+const queryClient = new QueryClient();
 export const routes = [
   {
     path: '/',
@@ -28,7 +31,7 @@ export const routes = [
       {
         path: '/article/:id',
         element: <ArticleEditPage />,
-        loader: articleIdLoader,
+        loader: articleLoader(queryClient),
       },
     ],
   },
