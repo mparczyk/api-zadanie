@@ -1,6 +1,6 @@
 import { useLoaderData, useParams } from 'react-router';
 import type { LoaderFunctionArgs } from 'react-router-dom';
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 
 import type { IArticle } from './types';
 
@@ -34,10 +34,12 @@ export const useArticleQuery = () => {
   return article;
 };
 
-export const editArticle = async (article: IArticle, data: object) => {
-  await request<IArticle>('put', `http://localhost:3001/articles/${article.id}`, data);
-};
+export const useArticleEditMutation = (article: IArticle) =>
+  useMutation({
+    mutationFn: (data: object) => request<IArticle>('put', `http://localhost:3001/articles/${article.id}`, data),
+  });
 
-export const deleteArticle = async (article: IArticle) => {
-  await request('delete', `http://localhost:3001/articles/${article.id}`);
-};
+export const useArticleDeleteMutation = (article: IArticle) =>
+  useMutation({
+    mutationFn: () => request('delete', `http://localhost:3001/articles/${article.id}`),
+  });

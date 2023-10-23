@@ -1,6 +1,6 @@
 import { Form, Button, Space } from 'antd';
 
-import { deleteArticle, editArticle, useArticleQuery } from './loaders';
+import { useArticleQuery, useArticleEditMutation, useArticleDeleteMutation } from './loaders';
 
 import { CommonForm } from './CommonForm';
 import { StyledForm } from './styles';
@@ -8,12 +8,11 @@ import { StyledForm } from './styles';
 export const ArticleEditPage = (): JSX.Element => {
   const article = useArticleQuery();
   const [form] = Form.useForm();
+  const { mutate: editArticle } = useArticleEditMutation(article);
+  const { mutate: deleteArticle } = useArticleDeleteMutation(article);
 
-  const handleSubmit = (data: object) => {
-    editArticle(article, data);
-  };
-  const handleClick = () => {
-    deleteArticle(article);
+  const handleDelete = () => {
+    deleteArticle();
   };
 
   return (
@@ -24,7 +23,7 @@ export const ArticleEditPage = (): JSX.Element => {
         name='edit-article'
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        onFinish={handleSubmit}
+        onFinish={editArticle}
         initialValues={article}
       >
         <CommonForm />
@@ -33,7 +32,7 @@ export const ArticleEditPage = (): JSX.Element => {
             <Button type='primary' htmlType='submit'>
               Save
             </Button>
-            <Button type='primary' danger onClick={handleClick}>
+            <Button type='primary' danger onClick={handleDelete}>
               Delete
             </Button>
           </Space>
