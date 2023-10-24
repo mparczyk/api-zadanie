@@ -1,18 +1,18 @@
 import { Form, Button, Space } from 'antd';
 
-import { useArticleQuery, useArticleEditMutation, useArticleDeleteMutation } from './loaders';
+import { useArticleQuery, useArticleEditMutation, useArticleDeleteMutation } from './queries';
 
 import { CommonForm } from './CommonForm';
 import { StyledForm } from './styles';
 
 export const ArticleEditPage = (): JSX.Element => {
-  const article = useArticleQuery();
+  const { data: article } = useArticleQuery();
   const [form] = Form.useForm();
-  const { mutate: editArticle } = useArticleEditMutation(article);
-  const { mutate: deleteArticle } = useArticleDeleteMutation(article);
+  const { mutate: editArticle } = useArticleEditMutation();
+  const { mutate: deleteArticle } = useArticleDeleteMutation();
 
   const handleDelete = () => {
-    deleteArticle();
+    deleteArticle(article.id);
   };
 
   return (

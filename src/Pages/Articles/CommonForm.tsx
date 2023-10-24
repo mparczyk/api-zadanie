@@ -16,6 +16,7 @@ export const CommonForm = (): JSX.Element => {
       >
         <TextArea rows={4} />
       </Form.Item>
+      <Form.Item label='id' name='id' hidden={true}></Form.Item>
     </>
   );
 };

@@ -1,34 +1,35 @@
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { List, Card } from 'antd';
+import { List, Card, Button } from 'antd';
+import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 
 import type { IArticle } from './types';
 
-import { request } from '../../utils/http';
+import { useAllArticlesQuery, useArticleDeleteMutation } from './queries';
 
-import { ContentWrapper, StyledEditIcon } from './styles';
+import { ContentWrapper, ButtonWrapper } from './styles';
 
 export const ArticlesSite = (): JSX.Element => {
-  const { data } = useQuery({
-    queryKey: ['articles'],
-    queryFn: () => request<IArticle[]>('get', 'http://localhost:3001/articles'),
-  });
+  const { data: articles } = useAllArticlesQuery();
+  const { mutate: deleteArticle } = useArticleDeleteMutation();
 
   return (
     <>
       <h2>Articles</h2>
       <List
         grid={{ gutter: 16, column: 3 }}
-        dataSource={data ?? []}
+        dataSource={articles ?? []}
         renderItem={(article: IArticle) => (
           <List.Item>
             <Card
               title={
                 <ContentWrapper>
                   <p>{article.article}</p>
-                  <Link to={`/article/${article.id}`}>
-                    <StyledEditIcon />
-                  </Link>
+                  <ButtonWrapper>
+                    <Link to={`/article/${article.id}`}>
+                      <Button icon={<FormOutlined />} />
+                    </Link>
+                    <Button danger icon={<DeleteOutlined />} onClick={() => deleteArticle(article.id)} />
+                  </ButtonWrapper>
                 </ContentWrapper>
               }
             >

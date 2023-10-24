@@ -13,14 +13,14 @@ export const CustomHeader = styled(Header)`
   align-items: center;
   min-height: 8vh;
   border-radius: 8px;
-  padding: 0;
+  padding: 8px;
   background-color: #fff;
 `;
 export const CustomContent = styled(Content)`
   text-align: center;
-  margin: 1vh;
+  margin: 0;
   padding: 16px;
-  min-height: 90vh;
+  min-height: 92vh;
   border-radius: 8px;
   background-color: #fff;
 `;

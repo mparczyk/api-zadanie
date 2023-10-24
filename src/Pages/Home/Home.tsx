@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router';
 import { useMatches } from 'react-router-dom';
-
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+
+import { menu } from './menuItems';
 
 import { CustomButton, CustomContent, CustomHeader, Title, TitleWrapper } from './styles';
-import { menu } from './menuItems';
 
 const { Sider } = Layout;
 

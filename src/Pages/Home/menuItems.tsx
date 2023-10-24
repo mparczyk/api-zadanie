@@ -1,14 +1,12 @@
 import { EditOutlined, HomeOutlined, FileTextOutlined } from '@ant-design/icons';
 
+import type { MenuProps } from 'antd';
+
 import { StyledLink } from './styles';
 
-interface menuProps {
-  key: string;
-  icon: JSX.Element;
-  label: JSX.Element;
-}
+type MenuItems = Required<MenuProps>['items'];
 
-export const menu: menuProps[] = [
+export const menu: MenuItems = [
   {
     key: 'start',
     icon: <HomeOutlined />,
