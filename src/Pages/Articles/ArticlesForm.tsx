@@ -3,7 +3,7 @@ import { Button, Form, Space } from 'antd';
 import { useNewArticleMutation } from './queries';
 
 import { CommonForm } from './CommonForm';
-import { StyledForm } from './styles';
+import { StyledForm, Title } from './styles';
 
 export const ArcitlesForm = (): JSX.Element => {
   const [form] = Form.useForm();
@@ -15,7 +15,7 @@ export const ArcitlesForm = (): JSX.Element => {
 
   return (
     <>
-      <h2>Create New Article</h2>
+      <Title>Create New Article</Title>
       <StyledForm form={form} name='new-article' labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} onFinish={createNewArticle}>
         <CommonForm />
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

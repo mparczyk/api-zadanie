@@ -16,20 +16,10 @@ export const Home = (): JSX.Element => {
 
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(prevState => !prevState)}>
         <Menu theme='dark' mode='inline' selectedKeys={[matches.at(-1)?.id ?? '']} items={menu} />
       </Sider>
-      <Layout>
-        <CustomHeader>
-          <CustomButton
-            type='text'
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(prevState => !prevState)}
-          />
-          <TitleWrapper>
-            <Title>Super Article Page</Title>
-          </TitleWrapper>
-        </CustomHeader>
+      <Layout style={{ backgroundColor: '#001529' }}>
         <CustomContent>
           <Outlet />
         </CustomContent>

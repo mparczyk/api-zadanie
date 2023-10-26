@@ -1,41 +1,43 @@
 import { Link } from 'react-router-dom';
-import { List, Card, Button } from 'antd';
+import { List, Button, Collapse } from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 
 import type { IArticle } from './types';
 
 import { useAllArticlesQuery, useArticleDeleteMutation } from './queries';
 
-import { ContentWrapper, ButtonWrapper } from './styles';
+import { ButtonWrapper, Title, StyledList, StyledCollapse } from './styles';
 
 export const ArticlesSite = (): JSX.Element => {
   const { data: articles } = useAllArticlesQuery();
   const { mutate: deleteArticle } = useArticleDeleteMutation();
 
+  const extraButtons = (article: IArticle) => (
+    <ButtonWrapper>
+      <Link to={`/article/${article.id}`}>
+        <Button type='text' icon={<FormOutlined />} />
+      </Link>
+      <Button type='text' danger icon={<DeleteOutlined />} onClick={() => deleteArticle(article.id)} />
+    </ButtonWrapper>
+  );
   return (
     <>
-      <h2>Articles</h2>
-      <List
-        grid={{ gutter: 16, column: 3 }}
+      <Title>Articles</Title>
+      <StyledList
         dataSource={articles ?? []}
         renderItem={(article: IArticle) => (
-          <List.Item>
-            <Card
-              title={
-                <ContentWrapper>
-                  <p>{article.article}</p>
-                  <ButtonWrapper>
-                    <Link to={`/article/${article.id}`}>
-                      <Button icon={<FormOutlined />} />
-                    </Link>
-                    <Button danger icon={<DeleteOutlined />} onClick={() => deleteArticle(article.id)} />
-                  </ButtonWrapper>
-                </ContentWrapper>
-              }
-            >
-              <p>{article.description}</p>
-            </Card>
-          </List.Item>
+          <StyledCollapse
+            style={{ alignItems: 'center' }}
+            collapsible='icon'
+            items={[
+              {
+                label: <p>{article.article}</p>,
+                children: <p>{article.description}</p>,
+
+                extra: extraButtons(article),
+              },
+            ]}
+          />
         )}
       />
     </>

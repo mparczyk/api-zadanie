@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-export const Text = styled.p`
-  font-size: 4rem;
+export const Text = styled.h1`
   color: #001529;
 `;

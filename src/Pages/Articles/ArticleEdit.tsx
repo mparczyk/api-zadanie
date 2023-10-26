@@ -3,7 +3,7 @@ import { Form, Button, Space } from 'antd';
 import { useArticleQuery, useArticleEditMutation, useArticleDeleteMutation } from './queries';
 
 import { CommonForm } from './CommonForm';
-import { StyledForm } from './styles';
+import { StyledForm, Title } from './styles';
 
 export const ArticleEditPage = (): JSX.Element => {
   const { data: article } = useArticleQuery();
@@ -17,7 +17,7 @@ export const ArticleEditPage = (): JSX.Element => {
 
   return (
     <>
-      <h2>Edit Article</h2>
+      <Title>Edit Article</Title>
       <StyledForm
         form={form}
         name='edit-article'

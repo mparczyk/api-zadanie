@@ -10,18 +10,19 @@ export const StyledLink = styled(Link)`
 `;
 export const CustomHeader = styled(Header)`
   display: flex;
+  flex-grow: 1;
+  justify-content: center;
   align-items: center;
   min-height: 8vh;
   border-radius: 8px;
   padding: 8px;
-  background-color: #fff;
+  background-color: #001529;
 `;
 export const CustomContent = styled(Content)`
   text-align: center;
   margin: 0;
-  padding: 16px;
-  min-height: 92vh;
-  border-radius: 8px;
+  padding: 8px;
+  min-height: 100vh;
   background-color: #fff;
 `;
 export const CustomButton = styled(Button)`
