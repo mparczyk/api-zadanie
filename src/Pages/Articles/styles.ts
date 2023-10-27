@@ -20,22 +20,23 @@ export const Title = styled.h1`
 
 export const StyledList = styled(List).attrs(props => ({
   className: props.className,
-}))`
-  // .ant-collapse-item {
-  //   background-color: rgb(249, 249, 249);
-  // }
-  // .ant-collapse-header-text {
-  //   color: yellow;
-  // }
-`;
+}))``;
 
 export const StyledCollapse = styled(Collapse).attrs(props => ({
   className: props.className,
 }))`
+  margin-bottom: 8px;
+
+  .ant-collapse-header {
+    display: flex;
+    flex-grow: 1;
+  }
   .ant-collapse-item {
     background-color: rgb(249, 249, 249);
   }
-  .ant-collapse-header-text {
-    color: yellow;
+  .ant-collapse-content-box {
+    background-color: rgb(40, 56, 86);
+    color: white;
+    border-radius: 0px 0px 8px 8px;
   }
 `;

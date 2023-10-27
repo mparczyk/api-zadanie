@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { List, Button, Collapse } from 'antd';
+import { Button } from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 
 import type { IArticle } from './types';
@@ -27,13 +27,11 @@ export const ArticlesSite = (): JSX.Element => {
         dataSource={articles ?? []}
         renderItem={(article: IArticle) => (
           <StyledCollapse
-            style={{ alignItems: 'center' }}
             collapsible='icon'
             items={[
               {
-                label: <p>{article.article}</p>,
+                label: <h3>{article.article}</h3>,
                 children: <p>{article.description}</p>,
-
                 extra: extraButtons(article),
               },
             ]}

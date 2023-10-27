@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { Outlet } from 'react-router';
 import { useMatches } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 import { menu } from './menuItems';
 
-import { CustomButton, CustomContent, CustomHeader, Title, TitleWrapper } from './styles';
+import { CustomContent } from './styles';
 
 const { Sider } = Layout;
 
@@ -17,7 +16,7 @@ export const Home = (): JSX.Element => {
   return (
     <Layout>
       <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(prevState => !prevState)}>
-        <Menu theme='dark' mode='inline' selectedKeys={[matches.at(-1)?.id ?? '']} items={menu} />
+        <Menu theme='dark' mode='inline' selectedKeys={[matches.at(-1)?.id ?? '']} items={menu} aria-selected={true} />
       </Sider>
       <Layout style={{ backgroundColor: '#001529' }}>
         <CustomContent>
