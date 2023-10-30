@@ -6,4 +6,4 @@ export interface IArticle {
 
 export type ArticleUpdateProps = IArticle;
 
-export type ArticleCreateProps = Omit<IArticle, 'id'>;
+export type ArticleCreateProps = Omit<IArticle, "id">;

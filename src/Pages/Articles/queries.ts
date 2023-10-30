@@ -1,20 +1,21 @@
-import { useLoaderData, useParams } from 'react-router';
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import { useLoaderData, useParams } from "react-router";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 
-import type { LoaderFunctionArgs } from 'react-router-dom';
-import type { IArticle, ArticleCreateProps, ArticleUpdateProps } from './types';
+import type { LoaderFunctionArgs } from "react-router-dom";
+import type { IArticle, ArticleCreateProps, ArticleUpdateProps } from "./types";
 
-import { request } from '../../utils/http';
+import { request } from "../../utils/http";
 
 export const useAllArticlesQuery = () =>
   useQuery({
-    queryKey: ['articles'],
-    queryFn: () => request<IArticle[]>('get', 'http://localhost:3001/articles'),
+    queryKey: ["articles"],
+    queryFn: () => request<IArticle[]>("get", "http://localhost:3001/articles"),
   });
 
 const articleDetailQuery = (id: number) => ({
-  queryKey: ['articles', id],
-  queryFn: () => request<IArticle>('get', `http://localhost:3001/articles/${id}`),
+  queryKey: ["articles", id],
+  queryFn: () =>
+    request<IArticle>("get", `http://localhost:3001/articles/${id}`),
 });
 
 export const articleLoader =
@@ -41,15 +42,22 @@ export const useArticleQuery = () => {
 
 export const useArticleEditMutation = () =>
   useMutation({
-    mutationFn: (data: ArticleUpdateProps) => request<IArticle>('put', `http://localhost:3001/articles/${data.id}`, data),
+    mutationFn: (data: ArticleUpdateProps) =>
+      request<IArticle>(
+        "put",
+        `http://localhost:3001/articles/${data.id}`,
+        data
+      ),
   });
 
 export const useArticleDeleteMutation = () =>
   useMutation({
-    mutationFn: (id: number) => request<IArticle>('delete', `http://localhost:3001/articles/${id}`),
+    mutationFn: (id: number) =>
+      request<IArticle>("delete", `http://localhost:3001/articles/${id}`),
   });
 
 export const useNewArticleMutation = () =>
   useMutation({
-    mutationFn: (data: ArticleCreateProps) => request<IArticle>('post', 'http://localhost:3001/articles', data),
+    mutationFn: (data: ArticleCreateProps) =>
+      request<IArticle>("post", "http://localhost:3001/articles", data),
   });
