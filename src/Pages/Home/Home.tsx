@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router';
-import { useMatches } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { useState } from "react";
+import { Outlet } from "react-router";
+import { useMatches } from "react-router-dom";
+import { Layout, Menu } from "antd";
 
-import { menu } from './menuItems';
+import { menu } from "./menuItems";
 
-import { CustomContent } from './styles';
+import { CustomContent, StyledMenu } from "./styles";
 
 const { Sider } = Layout;
 
@@ -15,10 +15,19 @@ export const Home = (): JSX.Element => {
 
   return (
     <Layout>
-      <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(prevState => !prevState)}>
-        <Menu theme='dark' mode='inline' selectedKeys={[matches.at(-1)?.id ?? '']} items={menu} aria-selected={true} />
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={() => setCollapsed((prevState) => !prevState)}
+      >
+        <StyledMenu
+          theme="dark"
+          mode="inline"
+          selectedKeys={[matches.at(-1)?.id ?? ""]}
+          items={menu}
+        />
       </Sider>
-      <Layout style={{ backgroundColor: '#001529' }}>
+      <Layout style={{ backgroundColor: "#001529" }}>
         <CustomContent>
           <Outlet />
         </CustomContent>

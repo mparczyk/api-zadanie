@@ -1,53 +1,29 @@
-import { Link } from "react-router-dom";
-import { Button } from "antd";
-import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
+import { List } from "antd";
 
 import type { IArticle } from "./types";
 
-import { useAllArticlesQuery, useArticleDeleteMutation } from "./queries";
+import { useAllArticlesQuery } from "./queries";
 
-import {
-  ButtonWrapper,
-  Title,
-  StyledList,
-  StyledCollapse,
-  ContentWrapper,
-  StyledArrowIcon,
-} from "./styles";
+import { Title, StyledCollapse, StyledArrowIcon } from "./styles";
+import { CollapseLabel } from "./CollapseLabel";
 
 export const ArticlesSite = (): JSX.Element => {
   const { data: articles } = useAllArticlesQuery();
-  const { mutate: deleteArticle } = useArticleDeleteMutation();
 
   return (
     <>
       <Title>Articles</Title>
-      <StyledList
+      <List
         dataSource={articles ?? []}
         renderItem={(article: IArticle) => (
           <StyledCollapse
             collapsible="icon"
             expandIcon={({ isActive }) => (
-              <StyledArrowIcon rotate={isActive ? 180 : 0} />
+              <StyledArrowIcon tabIndex={0} rotate={isActive ? 180 : 0} />
             )}
             items={[
               {
-                label: (
-                  <ContentWrapper>
-                    <h3>{article.article}</h3>
-                    <ButtonWrapper>
-                      <Link to={`/article/${article.id}`}>
-                        <Button type="text" icon={<FormOutlined />} />
-                      </Link>
-                      <Button
-                        type="text"
-                        danger
-                        icon={<DeleteOutlined />}
-                        onClick={() => deleteArticle}
-                      />
-                    </ButtonWrapper>
-                  </ContentWrapper>
-                ),
+                label: <CollapseLabel {...article} />,
                 children: <p>{article.description}</p>,
               },
             ]}

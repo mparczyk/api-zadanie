@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { Layout, Button } from 'antd';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { Layout, Button, Menu } from "antd";
 
 const { Header, Content } = Layout;
 
@@ -37,4 +37,20 @@ export const TitleWrapper = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: center;
+`;
+export const StyledMenu = styled(Menu)`
+  height: 100%;
+  
+  }
+  .ant-menu-item-active {
+    :focus-visible {
+      border: 4px solid rgba(97, 186, 250, 0.7);
+      border-radius: 8px;
+    }
+  }
+  .ant-menu-item-active .ant-menu-item-selected {
+    :focus-visible {
+      border: none;
+    }
+  }
 `;

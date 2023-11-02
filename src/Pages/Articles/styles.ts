@@ -1,22 +1,43 @@
 import styled from "styled-components";
-import { Collapse, Form, List } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Collapse, Form } from "antd";
+import { DownOutlined, FormOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 export const StyledArrowIcon = styled(DownOutlined)`
-  height: 24px;
-  width: 24px;
-  padding-top: 32px;
+  height: 32px;
+  width: 32px;
+  padding-left: 4px;
 `;
-
+export const StyledEditIcon = styled(FormOutlined)`
+  width: 100%;
+  height: 100%;
+  color: rgba(1, 1, 1, 0.7);
+`;
+export const StyledLink = styled(Link)`
+  display: flex;
+  height: 32px;
+  width: 32px;
+  &:focus {
+    border: 4px solid rgba(97, 186, 250, 0.7);
+    border-radius: 8px;
+  }
+  .anticon-form {
+    display: flex;
+    justify-content: center;
+  }
+`;
 export const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 12px 0px 12px;
+  height: 100%;
 `;
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
+  height: 100%;
 `;
 export const StyledForm = styled(Form)`
   max-width: 600px;
@@ -25,23 +46,11 @@ export const Title = styled.h1`
   color: #001529;
 `;
 
-export const StyledList = styled(List).attrs((props) => ({
-  className: props.className,
-}))``;
-
-export const StyledCollapse = styled(Collapse).attrs((props) => ({
-  className: props.className,
-}))`
+export const StyledCollapse = styled(Collapse)`
   margin-bottom: 8px;
   display: flex;
-  flex-grow: 1;
   width: 100%;
 
-  &.ant-collapse-header {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-  }
   .ant-collapse-item {
     background-color: rgb(249, 249, 249);
     width: 100%;
@@ -51,7 +60,10 @@ export const StyledCollapse = styled(Collapse).attrs((props) => ({
     color: white;
     border-radius: 0px 0px 8px 8px;
   }
-  . ant-collapse-icon {
-    height: 100%;
+  .ant-collapse-expand-icon {
+    :focus {
+      border: 4px solid rgba(97, 186, 250, 0.7);
+      border-radius: 8px;
+    }
   }
 `;
