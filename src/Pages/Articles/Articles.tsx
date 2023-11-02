@@ -4,8 +4,8 @@ import type { IArticle } from "./types";
 
 import { useAllArticlesQuery } from "./queries";
 
-import { Title, StyledCollapse, StyledArrowIcon } from "./styles";
 import { CollapseLabel } from "./CollapseLabel";
+import { Title, StyledCollapse, StyledArrowIcon } from "./styles";
 
 export const ArticlesSite = (): JSX.Element => {
   const { data: articles } = useAllArticlesQuery();

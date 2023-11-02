@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { Button } from "antd";
-import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 
 import type { IArticle } from "./types";
 

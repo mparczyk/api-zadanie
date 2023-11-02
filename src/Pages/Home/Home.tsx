@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
 import { useMatches } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 
 import { menu } from "./menuItems";
 
